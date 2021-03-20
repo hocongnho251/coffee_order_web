@@ -1,15 +1,15 @@
 <template>
   <v-card>
-    <v-card-title>
-      Home Page
-    </v-card-title>
+    ORDER
   </v-card>
 </template>
 
 <script>
-
 export default {
-  components: {
-  },
+
 }
 </script>
+
+<style>
+
+</style>

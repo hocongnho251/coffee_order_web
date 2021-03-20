@@ -27,7 +27,9 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    { path: '~/components/global', global: true },
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -37,13 +39,59 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyBDMqg_uurmHryE0qAWbMVNk_cDv9zkwi0",
+          authDomain: "coffeeorderfinal.firebaseapp.com",
+          databaseURL: "https://coffeeorderfinal-default-rtdb.firebaseio.com",
+          projectId: "coffeeorderfinal",
+          storageBucket: "coffeeorderfinal.appspot.com",
+          messagingSenderId: "679686712893",
+          appId: "1:679686712893:web:7844a3fbd979d35dd20454",
+          measurementId: "G-R03WKS56EJ"
+        },
+        services: {
+          auth: true,
+          firestore: true,
+          functions: true,
+          storage: true,
+          database: true,
+          messaging: true,
+          performance: true,
+          analytics: true,
+          remoteConfig: true
+        }
+      },
+    ],
+    [
+    'nuxt-i18n',
+      {
+        lazy: true,
+        detectBrowserLanguage: false,
+        langDir: 'locales/',
+        defaultLocale: 'vi-vn',
+        strategy: 'no_prefix',
+        locales: [
+          {
+            code: 'vi-vn',
+            file: 'vi-VN.js'
+          },
+          {
+            code: 'en-gb',
+            file: 'en-GB.js'
+          },
+        ],
+      },
+    ]
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
