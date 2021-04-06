@@ -25,24 +25,24 @@ setInteractionMode("custom", (context) => {
 
 extend("required", {
   ...required,
-  message: "{_field_} is required",
+  message: "Yêu cầu nhập {_field_}",
 })
 
 extend("numeric", {
   ...numeric,
-  message: "This field must only contain numeric characters",
+  message: "{_field_} chỉ chứa số",
 })
 
 extend("email", {
   ...email,
-  message: "Please, input correct format of email",
+  message: "Hãy nhập đúng định dạng email",
 })
 
 extend("password", {
   validate(value) {
-    return value.length >= 8
+    return value.length >= 6
   },
-  message: "Password must be more than 8 characters",
+  message: "Mật khẩu trên 6 kí tự",
 })
 
 extend("tel", {
@@ -52,29 +52,3 @@ extend("tel", {
   message: "Please, input correctly phone format",
 })
 
-extend("peX", {
-  validate: (value) => {
-    const temp = value.replaceAll("-","")
-    let strValue = temp.toString()
-    let firstStr = temp.slice(0, strValue.length - 2)
-    let secondStr = temp.slice(strValue.length - 2, strValue.length)
-    let toTal = 0
-    for(let i = 0; i < firstStr.length; i++){
-      if(Number(firstStr[i]) % 2 == 0){
-        toTal += Number(firstStr[i])
-      } else {
-        toTal += Number(firstStr[i]) * 3
-      }     
-    }
-    if((toTal % 11) !== Number(secondStr)){
-      return {
-        valid: false
-      }
-    } else {
-      return {
-        valid: true
-      }
-    }
-  },
-  message: "PeX account number is invalid"
-})

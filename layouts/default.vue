@@ -2,29 +2,17 @@
   <v-app
     app
   >
-    <v-app-bar app>
+    <v-app-bar v-if="isLogged" app color="#F0623D">
       <v-container>
-        {{$t("admin.home")}}
+        <div class="text-right white--text font-weight-bold">
+          Nho Ho
+        </div>
       </v-container>
     </v-app-bar>
-    <v-navigation-drawer v-if="isLogged" app color="#333">
-      <v-list-item class="px-2 py-6">
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-title class="white--text">John Leider</v-list-item-title>
-
-        <v-btn
-          icon
-          @click.stop="mini = !mini"
-        >
-          <v-icon color="white">mdi-chevron-left</v-icon>
-        </v-btn>
-      </v-list-item>
-
-      <v-divider color="white"></v-divider>
-
+    <v-navigation-drawer v-if="isLogged" app color="#F8EFE5">
+      <div class="mb-9">
+        <v-img src="logo_text.png"></v-img>
+      </div>
       <v-list dense>
         <v-list-item
           v-for="item in items"
@@ -34,20 +22,22 @@
           :to="item.to"
         >
           <v-list-item-icon>
-            <v-icon color="white">{{ item.icon }}</v-icon>
+            <v-icon color="#303030">{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="white--text">{{ item.title }}</v-list-item-title>
+            <v-list-item-title class="#303030--text font-weight-bold">{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-divider color="#303030"></v-divider>
         <v-btn
           block
           @click="logout"
+          color="#F8EFE5"
         >
-
           {{$t("admin.logout")}}
         </v-btn>
+        <v-divider color="#303030"></v-divider>
       </v-list>
     </v-navigation-drawer>
     <v-main>
@@ -75,9 +65,9 @@ export default {
       items: [
           { title: this.$i18n.t("admin.home"), icon: 'mdi-home-city', to: '/' },
           { title: this.$i18n.t("admin.staff"), icon: 'mdi-account', to: '/staff' },
-          { title: this.$i18n.t("admin.user"), icon: 'mdi-account-group-outline', to: '/user' },
+          { title: this.$i18n.t("admin.customer"), icon: 'mdi-account-group-outline', to: '/customer' },
+          { title: this.$i18n.t("admin.table"), icon: 'mdi-table-large', to: '/table' },
           { title: this.$i18n.t("admin.order"), icon: 'mdi-account-group-outline', to: '/order' },
-          { title: this.$i18n.t("admin.table"), icon: 'mdi-account-group-outline', to: '/order' },
           { title: this.$i18n.t("admin.coupon"), icon: 'mdi-account-group-outline', to: '/order' },
           { title: this.$i18n.t("admin.statistics"), icon: 'mdi-account-group-outline', to: '/order' },
         ],

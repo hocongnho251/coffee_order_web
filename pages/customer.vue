@@ -1,13 +1,13 @@
 <template>
   <div>
     <v-card class="mt-9">
-      <div class="display-1 font-weight-bold">{{ $t("staff.title") }}</div>
+      <div class="display-1 font-weight-bold">{{ $t("customer.title") }}</div>
       <v-btn
         color="#F0623D"
         class="outline-btn white--text font-weight-bold my-9 ml-5"
         @click="open"
       >
-        {{ $t("staff.new") }}
+        {{ $t("customer.new") }}
       </v-btn>
       <v-simple-table dense>
         <template v-slot:default>
@@ -31,8 +31,8 @@
               <td>
                 {{
                   isDelete(item.is_delete)
-                    ? $t("staff.inactive")
-                    : $t("staff.active")
+                    ? $t("customer.inactive")
+                    : $t("customer.active")
                 }}
               </td>
               <td>
@@ -74,7 +74,7 @@
     <v-dialog v-model="dialog" max-width="500px">
       <v-card>
         <v-card-title>
-          {{ $t("staff.form.title") }}
+          {{ $t("customer.form.title") }}
           <v-btn absolute right icon @click="close">
             <v-icon>mdi-close</v-icon>
           </v-btn>
@@ -84,7 +84,7 @@
             <c-form ref="cform" @submit="onEdit">
               <v-row>
                 <v-col cols="12">
-                  <div>{{ $t("staff.form.email") }}</div>
+                  <div>{{ $t("customer.form.email") }}</div>
                   <c-text-field
                     v-model="editItem.email"
                     :disabled="isUpdate"
@@ -93,35 +93,35 @@
                   ></c-text-field>
                 </v-col>
                 <v-col v-if="!isUpdate" cols="12">
-                  <div>{{ $t("staff.form.password") }}</div>
+                  <div>{{ $t("customer.form.password") }}</div>
                   <c-text-field
                     v-model="editItem.password"
                     password
-                    :label="$t('staff.form.password')"
+                    :label="$t('customer.form.password')"
                     rules="required|password"
                   ></c-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <div>{{ $t("staff.form.first_name") }}</div>
+                  <div>{{ $t("customer.form.first_name") }}</div>
                   <c-text-field
                     v-model="editItem.firstName"
-                    :label="$t('staff.form.first_name')"
+                    :label="$t('customer.form.first_name')"
                     rules="required"
                   ></c-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <div>{{ $t("staff.form.last_name") }}</div>
+                  <div>{{ $t("customer.form.last_name") }}</div>
                   <c-text-field
                     v-model="editItem.lastName"
-                    :label="$t('staff.form.last_name')"
+                    :label="$t('customer.form.last_name')"
                     rules="required"
                   ></c-text-field>
                 </v-col>
                 <v-col cols="12">
-                  <div>{{ $t("staff.form.phone") }}</div>
+                  <div>{{ $t("customer.form.phone") }}</div>
                   <c-text-field
                     v-model="editItem.phone"
-                    :label="$t('staff.form.phone')"
+                    :label="$t('customer.form.phone')"
                     rules="required|numeric"
                   ></c-text-field>
                 </v-col>
@@ -133,7 +133,7 @@
                   class="outline-btn font-weight-bold"
                   @click="$refs.cform.submit()"
                 >
-                  {{ isUpdate ? $t("staff.form.edit") : $t("staff.form.add") }}
+                  {{ isUpdate ? $t("customer.form.edit") : $t("customer.form.add") }}
                 </v-btn>
               </template>
             </c-form>
@@ -149,11 +149,11 @@ export default {
   data() {
     return {
       header: [
-        this.$i18n.t("staff.header.email"),
-        this.$i18n.t("staff.header.name"),
-        this.$i18n.t("staff.header.phone"),
-        this.$i18n.t("staff.header.role"),
-        this.$i18n.t("staff.header.status"),
+        this.$i18n.t("customer.header.email"),
+        this.$i18n.t("customer.header.name"),
+        this.$i18n.t("customer.header.phone"),
+        this.$i18n.t("customer.header.role"),
+        this.$i18n.t("customer.header.status"),
         ""
       ],
       staffs: [],
@@ -194,7 +194,7 @@ export default {
             });
           });
         });
-        this.totalItem = peoples.filter(item => item.role == "staff");
+        this.totalItem = peoples.filter(item => item.role == "customer");
         this.totalPage = Math.ceil(this.totalItem.length / 6);
         this.panigate();
       } catch (error) {
@@ -238,7 +238,7 @@ export default {
             firstName: this.editItem.firstName,
             lastName: this.editItem.lastName,
             phone: this.editItem.phone,
-            role: "staff"
+            role: "customer"
           });
           this.getStaffList();
           this.dialog = false;

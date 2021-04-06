@@ -14,7 +14,7 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'stylesheet', href: "https://fonts.googleapis.com/css2?family=Quicksand&display=swap" }
     ]
   },
 
@@ -26,6 +26,7 @@ export default {
   plugins: [
     '~/plugins/persistedstate',
     '~/plugins/vee-validate',
+    { src: '~/plugins/vue-client', ssr: false }
   ],
 
 
@@ -93,6 +94,7 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    treeShake: true,
     theme: {
       dark: false,
       themes: {

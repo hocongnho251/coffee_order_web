@@ -1,56 +1,79 @@
 <template>
   <c-layout center>
-    <div class="py-3">
-      <v-card class="ma-auto" flat color="transparent" max-width="343">
-        <v-card-title>
-          LOGIN
+    <v-img src="logo.png" height="200" contain> </v-img>
+    <div>
+      <v-card
+        class="ma-auto text-center"
+        flat
+        color="transparent"
+        max-width="400"
+      >
+        <v-card-title class="d-flex justify-center display-1 font-weight-bold">
+          Admin Login
         </v-card-title>
-        <v-card-text>
-          <v-text-field
-            v-model="email"
-            type="email"
-            label="Email"
-          />
-          <v-text-field
-            v-model="password"
-            label="Password"
-          />
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            large
-            block
-            @click.stop="login"
-          >
-            Login
-          </v-btn>
-        </v-card-actions>
+        <c-form ref="cform" @submit="login">
+          <v-card-text>
+            <c-text-field
+              v-model="email"
+              rules="required|email"
+              label="Email"
+            />
+            <c-text-field
+              v-model="password"
+              rules="required|password"
+              password
+              label="Password"
+            />
+          </v-card-text>
+          <template v-slot:action>
+            <v-btn
+              large
+              width="200"
+              color="#F0623D"
+              class="outline-btn font-weight-bold"
+              @click="$refs.cform.submit()"
+            >
+              Login
+            </v-btn>
+          </template>
+        </c-form>
       </v-card>
     </div>
   </c-layout>
 </template>
 
 <script>
+import cForm from "../components/global/c-form.vue";
 
 export default {
-  data(){
+  components: { cForm },
+  data() {
     return {
-      email: '',
-      password: ''
-    }
+      email: "",
+      password: ""
+    };
   },
   methods: {
-    async login(){
-      await this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
-        .then((userCredential) => {
+    async login() {
+      await this.$fire.auth
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(userCredential => {
           this.$store.commit("SET_LOGGED", true);
-          this.$router.push('/')
+          this.$notyf.success({
+            message: "Đăng nhập thành công",
+            icon: false,
+            dismissible: true
+          });
+          this.$router.push("/staff");
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(error => {
+          this.$notyf.error({
+            message: "Email hoặc mật khẩu không đúng",
+            icon: false,
+            dismissible: true
+          });
         });
     }
   }
-}
-
+};
 </script>
