@@ -60,7 +60,7 @@ export default {
         .then(userCredential => {
           this.$store.commit("SET_LOGGED", true);
           this.$notyf.success({
-            message: "Đăng nhập thành công",
+            message: this.$t('notyf.login.success'),
             icon: false,
             dismissible: true
           });
@@ -68,7 +68,7 @@ export default {
         })
         .catch(error => {
           this.$notyf.error({
-            message: "Email hoặc mật khẩu không đúng",
+            message: this.$t('notyf.login.error'),
             icon: false,
             dismissible: true
           });

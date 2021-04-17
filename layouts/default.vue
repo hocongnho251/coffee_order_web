@@ -11,7 +11,7 @@
     </v-app-bar>
     <v-navigation-drawer v-if="isLogged" app color="#F8EFE5">
       <div class="mb-9">
-        <v-img src="logo_text.png"></v-img>
+        <v-img src="/logo_text.png"></v-img>
       </div>
       <v-list dense>
         <v-list-item
@@ -67,8 +67,9 @@ export default {
           { title: this.$i18n.t("admin.staff"), icon: 'mdi-account', to: '/staff' },
           { title: this.$i18n.t("admin.customer"), icon: 'mdi-account-group-outline', to: '/customer' },
           { title: this.$i18n.t("admin.table"), icon: 'mdi-table-large', to: '/table' },
-          { title: this.$i18n.t("admin.order"), icon: 'mdi-account-group-outline', to: '/order' },
-          { title: this.$i18n.t("admin.coupon"), icon: 'mdi-account-group-outline', to: '/order' },
+          { title: this.$i18n.t("admin.menu"), icon: 'mdi-account-group-outline', to: '/menu' },
+          { title: this.$i18n.t("admin.table_manager"), icon: 'mdi-account-group-outline', to: '/tables' },
+          { title: this.$i18n.t("admin.coupon"), icon: 'mdi-account-group-outline', to: '/coupon' },
           { title: this.$i18n.t("admin.statistics"), icon: 'mdi-account-group-outline', to: '/order' },
         ],
     }
