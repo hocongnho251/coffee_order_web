@@ -5,6 +5,7 @@ export default ({ store, route, redirect, error }) => {
       "login"
     ].includes(route.name)
     
+    
     const isLogged = store.getters.isLogged
     
     if (!isLogged && !no_auth) {
