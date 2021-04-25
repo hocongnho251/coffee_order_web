@@ -14,7 +14,7 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'stylesheet', href: "https://fonts.googleapis.com/css2?family=Quicksand&display=swap" }
     ]
   },
 
@@ -24,10 +24,16 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/persistedstate',
+    '~/plugins/vee-validate',
+    { src: '~/plugins/vue-client', ssr: false }
   ],
 
+
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    { path: '~/components/global', global: true },
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -37,13 +43,60 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: "AIzaSyBDMqg_uurmHryE0qAWbMVNk_cDv9zkwi0",
+          authDomain: "coffeeorderfinal.firebaseapp.com",
+          databaseURL: "https://coffeeorderfinal-default-rtdb.firebaseio.com",
+          projectId: "coffeeorderfinal",
+          storageBucket: "coffeeorderfinal.appspot.com",
+          messagingSenderId: "679686712893",
+          appId: "1:679686712893:web:7844a3fbd979d35dd20454",
+          measurementId: "G-R03WKS56EJ"
+        },
+        services: {
+          auth: true,
+          firestore: true,
+          functions: true,
+          storage: true,
+          database: true,
+          messaging: true,
+          performance: true,
+          analytics: true,
+          remoteConfig: true
+        }
+      },
+    ],
+    [
+    'nuxt-i18n',
+      {
+        lazy: true,
+        detectBrowserLanguage: false,
+        langDir: 'locales/',
+        defaultLocale: 'vi-vn',
+        strategy: 'no_prefix',
+        locales: [
+          {
+            code: 'vi-vn',
+            file: 'vi-VN.js'
+          },
+          {
+            code: 'en-gb',
+            file: 'en-GB.js'
+          },
+        ],
+      },
+    ]
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    treeShake: true,
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -60,9 +113,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: ["vee-validate/dist/rules"],
   },
   server: {
     port: 8080, // default: 3000
     host: '0.0.0.0' // default: localhost
-  }
+  },
+  router: {
+    middleware: "authenticated",
+    prefetchLinks: false,
+  },
 }
