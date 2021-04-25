@@ -17,7 +17,7 @@ export default {
       name: "Họ và tên",
       phone: "Số điện thoại",
       role: "Quyền",
-      status: "Trạng thái"
+      status: "Trạng thái",
     },
     new: "Thêm mới",
     inactive: "Xóa",
@@ -40,7 +40,8 @@ export default {
       name: "Họ và tên",
       phone: "Số điện thoại",
       role: "Quyền",
-      status: "Trạng thái"
+      status: "Trạng thái",
+      point: "Điểm"
     },
     new: "Thêm mới",
     inactive: "Xóa",
@@ -92,6 +93,18 @@ export default {
     },
     form: {
       title: "Thông tin bàn"
+    }
+  },
+  coupon: {
+    title: "Quản lý mã giảm giá",
+    header: {
+      name: "Tên mã",
+      price: "Số tiền",
+      point: "Số điểm"
+    },
+    new: "Thêm mới",
+    form: {
+      title: "Thông tin mã giảm giá"
     }
   },
   notyf: {

@@ -35,6 +35,7 @@
                     : $t("customer.active")
                 }}
               </td>
+              <td>{{ item.point }}</td>
               <td>
                 <v-btn icon @click="editStaff(item)">
                   <v-icon>
@@ -154,6 +155,7 @@ export default {
         this.$i18n.t("customer.header.phone"),
         this.$i18n.t("customer.header.role"),
         this.$i18n.t("customer.header.status"),
+        this.$i18n.t("customer.header.point"),
         ""
       ],
       staffs: [],
@@ -165,7 +167,7 @@ export default {
         lastName: "",
         phone: "",
         role: "",
-        password: ""
+        password: "",
       },
       editIndex: -1,
       isUpdate: false,
@@ -190,6 +192,7 @@ export default {
               lastName: doc.val().lastName,
               phone: doc.val().phone,
               role: doc.val().role,
+              point: doc.val().point,
               is_delete: doc.val().is_delete
             });
           });
@@ -238,7 +241,8 @@ export default {
             firstName: this.editItem.firstName,
             lastName: this.editItem.lastName,
             phone: this.editItem.phone,
-            role: "customer"
+            role: "customer",
+            point: 0
           });
           this.getStaffList();
           this.dialog = false;

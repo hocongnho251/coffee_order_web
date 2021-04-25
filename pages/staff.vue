@@ -174,7 +174,7 @@ export default {
       totalItem: 0
     };
   },
-  mounted() {
+  created() {
     this.getStaffList();
   },
   methods: {

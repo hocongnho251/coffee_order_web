@@ -1,18 +1,19 @@
 <template>
   <div>
-    <div class="c-table__item">
-      <h2 class="white--text display-2 font-weight-black">{{ item.name }}</h2>
-    </div>
-    <div>
-      <v-btn
-        class="c-button"
-        block
-        :color="isEmpty ? '#F8EFE5' : '#AEB5B2'"
-        @click.stop="onChange(item)"
-      >
-        {{ isEmpty ? "Trống" : "Khách" }}
-      </v-btn>
-    </div>
+    <v-card flat @click.stop="onChange(item)" rounded>
+      <div class="c-table__item">
+        <h2 class="white--text display-2 font-weight-black">{{ item.name }}</h2>
+      </div>
+      <div>
+        <v-btn
+          class="c-button"
+          block
+          :color="isEmpty ? '#F8EFE5' : '#AEB5B2'"
+        >
+          {{ isEmpty ? "Trống" : "Khách" }}
+        </v-btn>
+      </div>
+    </v-card>
   </div>
 </template>
 
@@ -31,9 +32,13 @@ export default {
     }
   },
   methods: {
-    onChange(item){
+    onChange(item) {
       if(this.isEmpty){
-        this.$router.push({name: 'table-id-order', params: {id: item.name}, query: {key: item.key}})
+        this.$notyf.success({
+          message: "Bàn đang trống",
+          icon: false,
+          dismissible: true
+        });
       } else {
         this.$router.push({name: 'table-id-bill', params: {id: item.name}, query: {key: item.key}})
       }
@@ -50,7 +55,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: 12px !important;
   margin-bottom: 0px;
 }
 

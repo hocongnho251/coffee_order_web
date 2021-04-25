@@ -32,7 +32,7 @@
         <v-divider color="#303030"></v-divider>
         <v-btn
           block
-          @click="logout"
+          @click.stop="logout"
           color="#F8EFE5"
         >
           {{$t("admin.logout")}}
@@ -76,8 +76,8 @@ export default {
   },
   methods: {
     logout(){
+      this.$router.push({name: 'login'})
       this.$store.commit("SET_LOGGED", false)
-      this.$router.push({path: '/login'})
     }
   }
 }
