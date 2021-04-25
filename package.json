@@ -7,7 +7,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
     "@nuxtjs/firebase": "^7.5.0",
@@ -19,9 +19,9 @@
     "nuxt": "^2.14.12",
     "nuxt-i18n": "^6.21.1",
     "vee-validate": "^3.4.5",
-    "vuex-persistedstate": "^4.0.0-beta.3",
-    "@nuxtjs/vuetify": "^1.11.3"
+    "vuex-persistedstate": "^4.0.0-beta.3"
   },
   "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.3"
   }
 }
