@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "yarn start",
     "generate": "nuxt generate",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "yarn build"
   },
   "dependencies": {
     "@nuxtjs/firebase": "^7.5.0",
@@ -23,10 +23,5 @@
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.3"
-  },
-  "config": {
-    "nuxt": {
-      "port": 80
-    }
   }
 }
