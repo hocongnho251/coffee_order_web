@@ -37,6 +37,7 @@ export default {
               key: doc.key,
               name: doc.val().name,
               status: doc.val().status,
+              user_name: doc.val().user_name ? doc.val().user_name : ""
             });
           })
         });

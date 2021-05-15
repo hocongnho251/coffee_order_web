@@ -40,7 +40,7 @@ export default {
           dismissible: true
         });
       } else {
-        this.$router.push({name: 'table-id-bill', params: {id: item.name}, query: {key: item.key}})
+        this.$router.push({name: 'table-id-bill', params: {id: item.name}, query: {key: item.key, user_name: item.user_name}})
       }
     }
   }

@@ -150,10 +150,10 @@ export default {
               price: doc.val().price
             });
           });
-        });
         this.totalItem = list;
         this.totalPage = Math.ceil(this.totalItem.length / 6);
         this.panigate();
+        });
       } catch (error) {
         this.$notyf.error({
           message: error,

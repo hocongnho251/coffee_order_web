@@ -196,10 +196,10 @@ export default {
               is_delete: doc.val().is_delete
             });
           });
-        });
         this.totalItem = peoples.filter(item => item.role == "customer");
         this.totalPage = Math.ceil(this.totalItem.length / 6);
         this.panigate();
+        });
       } catch (error) {
         this.$notyf.error({
           message: error,

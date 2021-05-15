@@ -142,10 +142,10 @@ export default {
               status: doc.val().status
             });
           });
-        });
         this.totalItem = list;
         this.totalPage = Math.ceil(this.totalItem.length / 6);
         this.panigate();
+        });
       } catch (error) {
         this.$notyf.error({
           message: error,

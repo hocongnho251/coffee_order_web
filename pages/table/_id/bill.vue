@@ -4,6 +4,9 @@
       <div class="display-1 font-weight-bold mb-5">
         {{ $t("table.bill.title") }} {{ name }}
       </div>
+      <div class="title font-weight-bold mb-5">
+        Người đặt : {{userName}}
+      </div>
       <v-simple-table dense>
         <template v-slot:default>
           <thead>
@@ -50,7 +53,8 @@ export default {
       bills: [],
       totalAmount: 0,
       name: "",
-      key: ""
+      key: "",
+      userName: ""
     };
   },
   mounted() {
@@ -60,6 +64,8 @@ export default {
     async getOrderList() {
       this.name = this.$route.params.id;
       this.key = this.$route.query.key;
+      this.userName = this.$route.query.user_name;
+
       try {
         this.$fire.database.ref("table/" + this.key + "/order").on("value", snap => {
           snap.forEach(order => {
