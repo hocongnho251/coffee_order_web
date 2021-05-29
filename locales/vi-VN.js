@@ -7,7 +7,7 @@ export default {
     table_manager: "Quản lý bàn",
     menu: "Quản lý menu",
     coupon: "Quản lý coupon",
-    statistics: "Thống kê",
+    statistics: "Lịch sử order",
     logout: "Đăng xuất"
   },
   staff: {

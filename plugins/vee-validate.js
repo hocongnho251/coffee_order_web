@@ -52,3 +52,10 @@ extend("tel", {
   message: "Please, input correctly phone format",
 })
 
+extend("min", {
+  validate(value) {
+    return value > 0
+  },
+  message: "Số lượng phải lớn hơn 0",
+})
+
