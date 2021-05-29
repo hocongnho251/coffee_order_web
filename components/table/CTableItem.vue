@@ -5,11 +5,7 @@
         <h2 class="white--text display-2 font-weight-black">{{ item.name }}</h2>
       </div>
       <div>
-        <v-btn
-          class="c-button"
-          block
-          :color="isEmpty ? '#F8EFE5' : '#AEB5B2'"
-        >
+        <v-btn class="c-button" block :color="isEmpty ? '#F8EFE5' : '#AEB5B2'">
           {{ isEmpty ? "Trống" : "Khách" }}
         </v-btn>
       </div>
@@ -33,14 +29,22 @@ export default {
   },
   methods: {
     onChange(item) {
-      if(this.isEmpty){
+      if (this.isEmpty) {
         this.$notyf.success({
           message: "Bàn đang trống",
           icon: false,
           dismissible: true
         });
       } else {
-        this.$router.push({name: 'table-id-bill', params: {id: item.name}, query: {key: item.key, user_name: item.user_name}})
+        this.$router.push({
+          name: "table-id-bill",
+          params: { id: item.name },
+          query: {
+            key: item.key,
+            user_name: item.user_name,
+            email: item.user_email
+          }
+        });
       }
     }
   }

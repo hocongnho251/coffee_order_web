@@ -2,11 +2,11 @@
   <div>
     <v-row>
       <v-col cols="12">
-      <div class="display-1 font-weight-bold">{{ $t("table.title") }}</div>
+        <div class="display-1 font-weight-bold">{{ $t("table.title") }}</div>
       </v-col>
       <template v-for="item in tables">
         <v-col :key="item.name" cols="2" class="ma-5">
-          <c-table-item :item="item"/>
+          <c-table-item :item="item" />
         </v-col>
       </template>
     </v-row>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import CTableItem from '../../components/table/CTableItem.vue';
+import CTableItem from "../../components/table/CTableItem.vue";
 export default {
   components: {
     CTableItem
@@ -31,15 +31,16 @@ export default {
     async getTableList() {
       try {
         this.$fire.database.ref("table").on("value", snapshot => {
-          this.tables = []
+          this.tables = [];
           snapshot.forEach(doc => {
             this.tables.push({
               key: doc.key,
               name: doc.val().name,
               status: doc.val().status,
-              user_name: doc.val().user_name ? doc.val().user_name : ""
+              user_name: doc.val().user_name ? doc.val().user_name : "",
+              user_email: doc.val().user_email ? doc.val().user_email : ""
             });
-          })
+          });
         });
       } catch (error) {
         this.$notyf.error({
@@ -48,7 +49,7 @@ export default {
           dismissible: true
         });
       }
-    },
+    }
   }
 };
 </script>

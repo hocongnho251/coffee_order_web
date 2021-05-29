@@ -85,8 +85,8 @@ export default {
           title: this.$i18n.t("admin.coupon"),
           icon: "mdi-account-group-outline",
           to: "/coupon"
-        }
-        // { title: this.$i18n.t("admin.statistics"), icon: 'mdi-account-group-outline', to: '/order' },
+        },
+        { title: this.$i18n.t("admin.statistics"), icon: 'mdi-account-group-outline', to: '/statistical' },
       ]
     };
   },

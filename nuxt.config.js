@@ -41,7 +41,9 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
-
+  loading: {
+    color: '#F0623D',
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     [
