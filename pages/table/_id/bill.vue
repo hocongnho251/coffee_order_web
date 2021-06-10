@@ -47,6 +47,13 @@
     <div class="total-amount">
       {{ $t("table.bill.total_amount") }}: {{ totalAmount }} VNĐ
     </div>
+    <div class="total-amount" v-if="coupon > 0">
+      Mã giảm giá : {{ coupon }} VNĐ
+    </div>
+    <v-divider/>
+    <div class="total-amount" v-if="coupon > 0">
+      Thanh Toán : {{ totalAmount - coupon }} VNĐ
+    </div>
     <div class="total-amount" v-if="point > 0">
       Số điểm được cộng : {{ point }}
     </div>
@@ -135,7 +142,8 @@ export default {
       menu: [],
       item: "",
       point: 0,
-      userEmail: ""
+      userEmail: "",
+      coupon: ""
     };
   },
   created() {
@@ -174,6 +182,18 @@ export default {
               });
             });
           });
+          this.$fire.database
+          .ref("table/" + this.key).on("value", snap => {
+            if(snap.val().id_coupon && snap.val().id_coupon !== ""){
+              this.$fire.database.ref("coupons/").on("value", snapshot => {
+                snapshot.forEach(doc => {
+                  if(doc.key == snap.val().id_coupon){
+                    this.coupon = doc.val().price;
+                  }
+                });
+              });
+            }
+          });
       } catch (error) {
         this.$notyf.error({
           message: error,
@@ -185,6 +205,9 @@ export default {
     payment() {
       try {
         this.$fire.database.ref("table/" + this.key + "/order").remove();
+        this.$fire.database.ref("table/" + this.key ).update({
+          id_coupon: "",
+        });
         this.$fire.database.ref("table/" + this.key).update({
           status: "waiting"
         });
@@ -234,11 +257,17 @@ export default {
     onEdit() {
       if (this.isUpdate) {
         try {
+          let originPrice = 1;
+          this.menu.map(item=>{
+            if(this.editItem.order_name == item.name){
+              this.originPrice = item.price
+            }
+          })
           this.$fire.database
             .ref("table/" + this.key + "/order/" + this.editItem.key)
             .update({
               quantity: this.editItem.order_quantity,
-              price: this.editItem.order_quantity * this.editItem.order_price
+              price: this.editItem.order_quantity * this.originPrice
             });
           this.getOrderList();
           this.dialog = false;
