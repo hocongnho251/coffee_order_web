@@ -79,7 +79,8 @@ export default {
     title: "Quản lý menu",
     header: {
       name: "Tên món",
-      price: "Giá tiền"
+      price: "Giá tiền",
+      url: "URL"
     },
     form: {
       title: "Thông tin món"

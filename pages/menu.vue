@@ -26,6 +26,12 @@
             <tr v-for="item in menuList" :key="item.key" class="c-column">
               <td>{{ item.name }}</td>
               <td>{{ item.price }} VNĐ</td>
+              <td><v-img
+                max-height="150"
+                max-width="250"
+                contain
+                :src="item.imageUrl"
+              ></v-img></td>
               <td>
                 <v-btn icon @click="editStaff(item)">
                   <v-icon>
@@ -83,12 +89,26 @@
                     rules="required|numeric"
                   ></c-text-field>
                 </v-col>
+                <v-col cols="12">
+                  <div>{{ $t("menu.header.url") }}</div>
+                  <c-text-field
+                    v-model="editItem.imageUrl"
+                    :label="$t('menu.header.url')"
+                    rules="required"
+                  ></c-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-img
+                    max-height="300"
+                    :src="editItem.imageUrl"
+                  ></v-img>
+                </v-col>
               </v-row>
               <template v-slot:action>
                 <v-btn
                   large
                   color="#F0623D"
-                  class="outline-btn font-weight-bold"
+                  class="outline-btn font-weight-bold my-6"
                   @click="$refs.cform.submit()"
                 >
                   {{ isUpdate ? $t("staff.form.edit") : $t("staff.form.add") }}
@@ -116,7 +136,8 @@ export default {
       editItem: {
         key: "",
         name: "",
-        quantity: ""
+        price: "",
+        imageUrl: ""
       },
       editIndex: -1,
       isUpdate: false,
@@ -137,7 +158,8 @@ export default {
             list.push({
               key: doc.key,
               name: doc.val().name,
-              price: doc.val().price
+              price: doc.val().price,
+              imageUrl: doc.val().imageUrl
             });
           });
           this.totalItem = list;
@@ -163,7 +185,8 @@ export default {
         if (this.isUpdate) {
           this.$fire.database.ref("menu/" + this.editItem.key).update({
             name: this.editItem.name,
-            price: this.editItem.price
+            price: this.editItem.price,
+            imageUrl: this.editItem.imageUrl
           });
           this.getMenuList();
           this.dialog = false;
@@ -175,7 +198,8 @@ export default {
         } else {
           this.$fire.database.ref("menu/").push({
             name: this.editItem.name,
-            price: this.editItem.price
+            price: this.editItem.price,
+            imageUrl: this.editItem.imageUrl
           });
           this.getMenuList();
           this.dialog = false;
