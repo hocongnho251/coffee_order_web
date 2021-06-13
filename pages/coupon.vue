@@ -116,8 +116,8 @@ export default {
     return {
       header: [
         this.$i18n.t("coupon.header.name"),
+        this.$i18n.t("coupon.header.point"),
         this.$i18n.t("coupon.header.price"),
-        this.$i18n.t("coupon.header.point")
       ],
       couponList: [],
       dialog: false,
@@ -173,8 +173,8 @@ export default {
         if (this.isUpdate) {
           this.$fire.database.ref("coupons/" + this.editItem.key).update({
             name: this.editItem.name,
-            point: this.editItem.point,
-            price: this.editItem.price
+            point: Number(this.editItem.point),
+            price: Number(this.editItem.price)
           });
           this.getCouponList();
           this.dialog = false;
@@ -186,8 +186,8 @@ export default {
         } else {
           this.$fire.database.ref("coupons/").push({
             name: this.editItem.name,
-            point: this.editItem.point,
-            price: this.editItem.price
+            point: Number(this.editItem.point),
+            price: Number(this.editItem.price)
           });
           this.getCouponList();
           this.dialog = false;

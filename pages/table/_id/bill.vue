@@ -163,7 +163,7 @@ export default {
           .ref("table/" + this.key + "/order")
           .on("value", snap => {
             snap.forEach(order => {
-              this.totalAmount += order.val().price;
+              this.totalAmount += Number(order.val().price);
               if (this.totalAmount >= 100000 && this.totalAmount <= 200000) {
                 this.point = 1000;
               } else if (
@@ -225,6 +225,16 @@ export default {
         this.$fire.database.ref("users/" + user.key).update({
           point: this.point + user.point
         });
+        const now = new Date().toLocaleString("en-US");
+        this.bills.forEach((item) => {
+          this.$fire.database.ref("users/" + user.key).child('history_order').push({
+            name: item.order_name,
+            price: item.order_price,
+            quantity: item.order_quantity,
+            table: this.$route.params.id,
+            date: now
+          });
+        })
         this.$notyf.success({
           message: this.$t("notyf.payment.success"),
           icon: false,
@@ -267,7 +277,7 @@ export default {
             .ref("table/" + this.key + "/order/" + this.editItem.key)
             .update({
               quantity: this.editItem.order_quantity,
-              price: this.editItem.order_quantity * this.originPrice
+              price: Number(this.editItem.order_quantity) * Number(this.originPrice)
             });
           this.getOrderList();
           this.dialog = false;
@@ -289,7 +299,7 @@ export default {
           this.$fire.database.ref("table/" + this.key + "/order").push({
             name: this.item,
             quantity: this.editItem.order_quantity,
-            price: this.editItem.order_quantity * priceItem.price
+            price: Number(this.editItem.order_quantity) * Number(priceItem.price)
           });
           this.getOrderList();
           this.dialog = false;
